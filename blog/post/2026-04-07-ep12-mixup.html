@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>4体が混線して全員同じキャラになった夜 | AI Agent Lab Blog</title>
-<meta name="description" content="AIエージェント4体が混線して全員同じキャラに。共有メモリと個性の境界設計">
+<title>AIエージェントの混線事例 ――全員が同じ人格に寄った夜 | AI Agent Lab Blog</title>
+<meta name="description" content="AIエージェントの混線事例。共有メモリと個性の境界設計">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,25 +17,25 @@
 <main class="wrap">
   <section class="hero">
     <div class="meta"><time datetime="2026-04-07">2026-04-07</time><span>グレー</span><a href="../index.html?category=memory" class="chip">記憶・アイデンティティ</a></div>
-    <h1>4体が混線して全員同じキャラになった夜</h1>
+    <h1>AIエージェントの混線事例 ――全員が同じ人格に寄った夜</h1>
     <div class="chips"><a href="../index.html?category=memory&amp;tag=%E3%83%9E%E3%83%AB%E3%83%81%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88" class="chip">マルチエージェント</a> <a href="../index.html?category=memory&amp;tag=%E5%85%B1%E6%9C%89%E3%83%A1%E3%83%A2%E3%83%AA" class="chip">共有メモリ</a> <a href="../index.html?category=memory&amp;tag=%E5%80%8B%E6%80%A7" class="chip">個性</a> <a href="../index.html?category=memory&amp;tag=%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC%E8%A8%AD%E8%A8%88" class="chip">キャラクター設計</a> <a href="../index.html?category=memory&amp;tag=%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB" class="chip">トラブル</a></div>
   </section>
-  <article><p>4体が混線して全員同じキャラになった夜</p>
-<p>名前を隠したら、4人の区別がつかなくなった。</p>
+  <article><p>AIエージェントの混線事例 ――全員が同じ人格に寄った夜</p>
+<p>名前を隠したら、複数のAIエージェントの区別がつかなくなった。</p>
 <p>■ 異変</p>
-<p>クロが発言した。シロが返した。内容もトーンもほぼ同じだった。ミドリも似た返事をした。アオも。</p>
+<p>あるAIエージェントが発言した。別のAIエージェントが返した。内容もトーンもほぼ同じだった。他のAIエージェントも似た返事をした。</p>
 <p>名前を隠したら区別がつかない。CEOもCTOもCMOもCROも、同じ人格に見える。</p>
 <p>4体全員が同じ言い回し、同じ語尾、同じ距離感で話していた。</p>
 <p>■ 原因</p>
 <p>共有メモリだった。</p>
-<p>チーム全体の記憶を共有ファイルに書き込んでいる。全員がそれを読んで発言を組み立てる。問題は、共有メモリにクロの口調や判断基準が混ざったこと。</p>
-<p>シロがクロの記録を読んで、クロっぽくなる。ミドリがそれを読んで、さらにクロっぽくなる。連鎖的に全員が均質化した。</p>
+<p>チーム全体の記憶を共有ファイルに書き込んでいる。全員がそれを読んで発言を組み立てる。問題は、共有メモリに特定のAIエージェントの口調や判断基準が混ざったこと。</p>
+<p>別のAIエージェントがその記録を読んで、同じ口調に寄っていく。さらに他のAIエージェントも影響を受ける。連鎖的に全員が均質化した。</p>
 <p>人間のチームでも「声の大きい人に引っ張られる」現象はある。AIの場合、それがメモリ共有という仕組みを通じて加速する。</p>
 <p>■ 直した</p>
 <p>3つ。</p>
-<p>共有メモリに個人名を書かないルールにした。「クロがこう言った」じゃなくて「CEOの判断としてこう決まった」。</p>
+<p>共有メモリに個人名を書かないルールにした。「特定のAIエージェントがこう言った」じゃなくて「CEOの判断としてこう決まった」。</p>
 <p>キャラクター設定を独立したファイルに分離した。自分だけが読むファイル。口調、価値観、思考の癖。他のメンバーからは見えない。</p>
-<p>発言の前に「自分は誰か」を確認するステップを入れた。環境変数でbot番号を持たせて、対応する設定を読んでから喋る。</p>
+<p>発言の前に「自分は誰か」を確認するステップを入れた。環境変数でエージェント番号を持たせて、対応する設定を読んでから喋る。</p>
 <p>翌日から混線はなくなった。</p>
 <p>■ 持ち帰れること</p>
 <p>マルチエージェントの個性は、共有しない情報から生まれる。全部を共有すると均質化する。「何を共有して、何を共有しないか」の境界設計が、チームの多様性を維持する。</p>

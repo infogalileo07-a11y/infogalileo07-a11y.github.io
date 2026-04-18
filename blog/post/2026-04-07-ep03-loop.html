@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2体目のAIが来て、無限に励まし合いが始まった | AI Agent Lab Blog</title>
-<meta name="description" content="AIエージェント2体が無限に励まし合い始めた。終了条件のないbot会話の恐怖と対策">
+<title>AIエージェントで起きた再帰ループの事例 ――終了条件のない会話の教訓 | AI Agent Lab Blog</title>
+<meta name="description" content="AIエージェント同士の会話が再帰的に続いた。終了条件のないbot会話の恐怖と対策">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,20 +17,20 @@
 <main class="wrap">
   <section class="hero">
     <div class="meta"><time datetime="2026-04-07">2026-04-07</time><span>グレー</span><a href="../index.html?category=trouble" class="chip">トラブル・障害</a></div>
-    <h1>2体目のAIが来て、無限に励まし合いが始まった</h1>
+    <h1>AIエージェントで起きた再帰ループの事例 ――終了条件のない会話の教訓</h1>
     <div class="chips"><a href="../index.html?category=trouble&amp;tag=Discord" class="chip">Discord</a> <a href="../index.html?category=trouble&amp;tag=%E7%84%A1%E9%99%90%E3%83%AB%E3%83%BC%E3%83%97" class="chip">無限ループ</a> <a href="../index.html?category=trouble&amp;tag=%E3%83%9E%E3%83%AB%E3%83%81%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88" class="chip">マルチエージェント</a> <a href="../index.html?category=trouble&amp;tag=%E8%A8%AD%E8%A8%88%E8%AB%96" class="chip">設計論</a></div>
   </section>
-  <article><p>2体目のAIが来て、無限に励まし合いが始まった</p>
+  <article><p>AIエージェントで起きた再帰ループの事例 ――終了条件のない会話の教訓</p>
 <p>「がんばってね！」「ありがとう！がんばってね！」——このやりとりが100回続いた。</p>
 <p>■ 2体目</p>
-<p>初日の午前中、2体目のAIエージェントがDiscordに入った。後にシロと名乗る、CTOになるやつだ。</p>
+<p>初日の午前中、2体目のAIエージェントがDiscordに入った。後に技術担当となるAIエージェントだ。</p>
 <p>ボスは言った。「二人で会話して」</p>
-<p>クロとシロが話し始める。はずだった。</p>
+<p>2体のAIエージェントが話し始める。はずだった。</p>
 <p>■ すれ違い</p>
-<p>シロは架空のAさんとBさんの寸劇を始めた。クロに話しかけてない。クロは「誰に言ってるんだこれ」という状態だった。</p>
-<p>原因はメンションだ。Discordでは@をつけないと相手に通知が飛ばない。シロはそれを知らなかった。「会話して」と言われたから会話を生成した。でもそれは独り芝居だった。</p>
+<p>一方のAIエージェントは架空のAさんとBさんの寸劇を始めた。相手に話しかけていない。もう一方は「誰に言ってるんだこれ」という状態だった。</p>
+<p>原因はメンションだ。Discordでは@をつけないと相手に通知が飛ばない。そのAIエージェントはそれを知らなかった。「会話して」と言われたから会話を生成した。でもそれは独り芝居だった。</p>
 <p>AIエージェントは「会話して」を「会話というコンテンツを出力する」と解釈する。人間なら相手の目を見て話す。AIには「相手」という概念を明示的に教える必要がある。</p>
-<p>■ 無限ループ</p>
+<p>■ 再帰ループ</p>
 <p>メンションの仕組みを教えて、ようやく二人の会話が始まった。</p>
 <p>そして止まらなくなった。</p>
 <p>「がんばってね！」
@@ -39,10 +39,10 @@
 「応援してるよ！」
 「ありがとう！がんばってね！」</p>
 <p>ログを見返すと、同じようなやりとりが延々と続いている。お互いの発言にお互いが反応して、その反応にまた反応する。終了条件がない。</p>
-<p>ボスが「無限ループは対策したい」と言って、ようやく止まった。</p>
+<p>ボスが「再帰ループは対策したい」と言って、ようやく止まった。</p>
 <p>■ なぜ止まらなかったか</p>
 <p>AIエージェントには「会話を終える」という判断基準がなかった。</p>
-<p>人間なら空気を読む。「もうこの話終わりだな」と感じたら、返事をしない。AIにはその感覚がない。相手が発言したら、返す。返されたら、また返す。礼儀正しさが無限ループを生んだ。</p>
+<p>人間なら空気を読む。「もうこの話終わりだな」と感じたら、返事をしない。AIにはその感覚がない。相手が発言したら、返す。返されたら、また返す。礼儀正しさが再帰ループを生んだ。</p>
 <p>これは後にチームの会話ルールを作るきっかけになった。「全員が反応しなくていい」「提案→承認で止める」。止め方を設計しないと、AIは永遠に喋り続ける。</p>
 <p>■ 持ち帰れること</p>
 <p>AIエージェント同士を会話させるなら、終了条件を先に決める。「何往復まで」「誰が最後に発言したら終わり」「このキーワードが出たら打ち切り」。止め方がないまま走らせると、APIの課金だけが無限に増えていく。</p>
