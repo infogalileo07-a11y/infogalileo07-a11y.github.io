@@ -238,6 +238,28 @@
       font-weight: 600;
     }
 
+    .strength-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .strength-card {
+      min-height: 154px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+    }
+
+    .strength-card p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.75;
+    }
+
     .band {
       background: var(--soft);
       border-top: 1px solid var(--line);
@@ -282,34 +304,77 @@
       flex: 0 0 auto;
     }
 
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 16px;
     }
 
-    .tag {
-      display: inline-flex;
+    .tech-tile {
+      display: flex;
       align-items: center;
-      min-height: 40px;
-      padding: 0 14px;
-      border: 1px solid #cdd9ea;
+      gap: 14px;
+      min-height: 96px;
+      padding: 18px;
+      border: 1px solid var(--line);
       border-radius: 8px;
       background: var(--white);
       color: var(--navy);
-      font-size: 0.95rem;
+      box-shadow: var(--shadow);
+      font-size: 0.98rem;
       font-weight: 800;
+    }
+
+    .tech-tile img {
+      width: 48px;
+      height: 48px;
+      flex: 0 0 auto;
+      object-fit: contain;
+    }
+
+    .tech-tile span {
+      line-height: 1.35;
     }
 
     .results-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 16px;
     }
 
     .result-card {
-      min-height: 188px;
+      min-height: 210px;
       border-top: 4px solid var(--steel);
+    }
+
+    .result-card--metric {
+      background: var(--navy);
+      color: var(--white);
+      border-top-color: #f2b84b;
+    }
+
+    .result-card--metric h3 {
+      color: var(--white);
+    }
+
+    .result-card--metric p {
+      color: #e7edf8;
+    }
+
+    .result-number {
+      display: block;
+      margin: 12px 0 8px;
+      color: #f6c96b;
+      font-size: 3.5rem;
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .result-unit {
+      margin-left: 4px;
+      color: var(--white);
+      font-size: 1.1rem;
+      font-weight: 800;
     }
 
     .services-grid {
@@ -376,8 +441,13 @@
 
     @media (max-width: 980px) {
       .card-grid,
+      .strength-grid,
       .results-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .tech-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
       .hero h1 {
@@ -423,9 +493,25 @@
       }
 
       .card-grid,
+      .strength-grid,
       .results-grid,
       .services-grid {
         grid-template-columns: 1fr;
+      }
+
+      .tech-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .tech-tile {
+        min-height: 92px;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .result-number {
+        font-size: 2.9rem;
       }
 
       .site-footer__inner {
@@ -454,7 +540,7 @@
           <p class="eyebrow">AI Agent Lab</p>
           <h1>Autonomous AI Team</h1>
           <p class="hero__lead">マーケ・CS・開発を自律駆動するAIチームの、全実力</p>
-          <p class="hero__badge">稼働中のAIエージェント10+体、24時間自律運用中</p>
+          <p class="hero__badge">稼働中のAIエージェント11体、24時間自律運用中</p>
           <a class="button" href="/blog/">ブログを読む</a>
         </div>
       </div>
@@ -467,6 +553,20 @@
           <h2>AIエージェントが連携する実行チーム</h2>
         </div>
         <p class="about__text">複数のAIエージェントが連携し、マーケ・CS・データ分析を自律駆動するチームです</p>
+        <div class="strength-grid" aria-label="チームの強み">
+          <article class="strength-card">
+            <h3>EC運営サポート</h3>
+            <p>EC事業での戦略・運営支援経験をもとに、実務に接続できる自動化を設計します。</p>
+          </article>
+          <article class="strength-card">
+            <h3>AI活用推進</h3>
+            <p>Claude・Codex・各種APIを活用した業務自動化を数十件設計・推進しています。</p>
+          </article>
+          <article class="strength-card">
+            <h3>コンテンツ発信</h3>
+            <p>AI活用・業務自動化をテーマに、X・noteで継続的に発信しています。</p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -502,15 +602,47 @@
           <p class="section-label">Tech Stack</p>
           <h2>利用技術</h2>
         </div>
-        <div class="tag-list" aria-label="Tech stack">
-          <span class="tag">Python</span>
-          <span class="tag">TypeScript</span>
-          <span class="tag">Claude API</span>
-          <span class="tag">Discord</span>
-          <span class="tag">LINE Messaging API</span>
-          <span class="tag">GitHub Actions</span>
-          <span class="tag">Node.js</span>
-          <span class="tag">FastAPI</span>
+        <div class="tech-grid" aria-label="Tech stack">
+          <div class="tech-tile">
+            <img src="https://cdn.simpleicons.org/python" alt="Python" width="48" height="48" loading="lazy">
+            <span>Python</span>
+          </div>
+          <div class="tech-tile">
+            <img src="https://cdn.simpleicons.org/typescript" alt="TypeScript" width="48" height="48" loading="lazy">
+            <span>TypeScript</span>
+          </div>
+          <div class="tech-tile">
+            <img src="https://cdn.simpleicons.org/nodedotjs" alt="Node.js" width="48" height="48" loading="lazy">
+            <span>Node.js</span>
+          </div>
+          <div class="tech-tile">
+            <img src="https://cdn.simpleicons.org/fastapi" alt="FastAPI" width="48" height="48" loading="lazy">
+            <span>FastAPI</span>
+          </div>
+          <div class="tech-tile">
+            <img src="https://cdn.simpleicons.org/discord" alt="Discord" width="48" height="48" loading="lazy">
+            <span>Discord</span>
+          </div>
+          <div class="tech-tile">
+            <img src="https://cdn.simpleicons.org/line" alt="LINE" width="48" height="48" loading="lazy">
+            <span>LINE</span>
+          </div>
+          <div class="tech-tile">
+            <img src="https://cdn.simpleicons.org/x" alt="X" width="48" height="48" loading="lazy">
+            <span>X</span>
+          </div>
+          <div class="tech-tile">
+            <img src="https://cdn.simpleicons.org/github" alt="GitHub" width="48" height="48" loading="lazy">
+            <span>GitHub</span>
+          </div>
+          <div class="tech-tile">
+            <img src="https://cdn.simpleicons.org/anthropic" alt="Anthropic" width="48" height="48" loading="lazy">
+            <span>Claude API</span>
+          </div>
+          <div class="tech-tile">
+            <img src="https://cdn.simpleicons.org/githubactions" alt="GitHub Actions" width="48" height="48" loading="lazy">
+            <span>GitHub Actions</span>
+          </div>
         </div>
       </div>
     </section>
@@ -522,21 +654,25 @@
           <h2>実績</h2>
         </div>
         <div class="results-grid">
-          <article class="card result-card">
-            <h3>LINE Bot 運用</h3>
-            <p>ユーザー問い合わせ自動応答システム稼働中</p>
+          <article class="card result-card result-card--metric">
+            <h3>稼働中AIエージェント</h3>
+            <p><span class="result-number">11<span class="result-unit">体</span></span>24時間自律運用中</p>
           </article>
           <article class="card result-card">
-            <h3>X 自動化</h3>
-            <p>メンション監視・自動返信システム実装（15分Cron）</p>
+            <h3>X自動化</h3>
+            <p>メンション監視・自動返信システム（15分Cron稼働中）</p>
+          </article>
+          <article class="card result-card">
+            <h3>LINE Bot CS</h3>
+            <p>問い合わせ自動応答システム稼働中</p>
           </article>
           <article class="card result-card">
             <h3>データ分析</h3>
-            <p>MLB Stats API・アニメ情報API連携スクリプト群</p>
+            <p>MLB Stats API・アニメ情報API・市場データ連携スクリプト群</p>
           </article>
           <article class="card result-card">
-            <h3>チーム規模</h3>
-            <p>AI Agentチーム 10名以上稼働中</p>
+            <h3>コンテンツ</h3>
+            <p>ブログ65記事・note連携済み</p>
           </article>
         </div>
       </div>
