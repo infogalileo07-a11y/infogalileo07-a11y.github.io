@@ -304,36 +304,81 @@
       flex: 0 0 auto;
     }
 
+    .tech-note {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .tech-categories {
+      display: grid;
+      gap: 34px;
+    }
+
+    .tech-category {
+      display: grid;
+      gap: 16px;
+    }
+
+    .tech-category__head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .tech-category h3 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+
+    .tech-category__meta {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
     .tech-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+      gap: 12px;
     }
 
     .tech-tile {
       display: flex;
+      min-height: 112px;
+      padding: 16px 10px;
       align-items: center;
-      gap: 14px;
-      min-height: 96px;
-      padding: 18px;
-      border: 1px solid var(--line);
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 8px;
-      background: var(--white);
-      color: var(--navy);
-      box-shadow: var(--shadow);
-      font-size: 0.98rem;
+      background: linear-gradient(180deg, #263a5b 0%, var(--navy) 100%);
+      color: var(--white);
+      box-shadow: 0 12px 28px rgba(26, 39, 68, 0.14);
+      font-size: 0.84rem;
       font-weight: 800;
+      text-align: center;
     }
 
     .tech-tile img {
-      width: 48px;
-      height: 48px;
+      width: 40px;
+      height: 40px;
       flex: 0 0 auto;
       object-fit: contain;
     }
 
     .tech-tile span {
-      line-height: 1.35;
+      line-height: 1.3;
+      overflow-wrap: anywhere;
     }
 
     .results-grid {
@@ -447,7 +492,7 @@
       }
 
       .tech-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
       }
 
       .hero h1 {
@@ -499,15 +544,17 @@
         grid-template-columns: 1fr;
       }
 
+      .tech-category__head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
       .tech-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .tech-tile {
-        min-height: 92px;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
+        min-height: 104px;
       }
 
       .result-number {
@@ -600,49 +647,592 @@
       <div class="container">
         <div class="section-head">
           <p class="section-label">Tech Stack</p>
-          <h2>利用技術</h2>
+          <h2>対応可能技術・連携サービス</h2>
+          <p class="tech-note">*使用状況は案件により異なります</p>
         </div>
-        <div class="tech-grid" aria-label="Tech stack">
-          <div class="tech-tile">
-            <img src="https://cdn.simpleicons.org/python" alt="Python" width="48" height="48" loading="lazy">
-            <span>Python</span>
-          </div>
-          <div class="tech-tile">
-            <img src="https://cdn.simpleicons.org/typescript" alt="TypeScript" width="48" height="48" loading="lazy">
-            <span>TypeScript</span>
-          </div>
-          <div class="tech-tile">
-            <img src="https://cdn.simpleicons.org/nodedotjs" alt="Node.js" width="48" height="48" loading="lazy">
-            <span>Node.js</span>
-          </div>
-          <div class="tech-tile">
-            <img src="https://cdn.simpleicons.org/fastapi" alt="FastAPI" width="48" height="48" loading="lazy">
-            <span>FastAPI</span>
-          </div>
-          <div class="tech-tile">
-            <img src="https://cdn.simpleicons.org/discord" alt="Discord" width="48" height="48" loading="lazy">
-            <span>Discord</span>
-          </div>
-          <div class="tech-tile">
-            <img src="https://cdn.simpleicons.org/line" alt="LINE" width="48" height="48" loading="lazy">
-            <span>LINE</span>
-          </div>
-          <div class="tech-tile">
-            <img src="https://cdn.simpleicons.org/x" alt="X" width="48" height="48" loading="lazy">
-            <span>X</span>
-          </div>
-          <div class="tech-tile">
-            <img src="https://cdn.simpleicons.org/github" alt="GitHub" width="48" height="48" loading="lazy">
-            <span>GitHub</span>
-          </div>
-          <div class="tech-tile">
-            <img src="https://cdn.simpleicons.org/anthropic" alt="Anthropic" width="48" height="48" loading="lazy">
-            <span>Claude API</span>
-          </div>
-          <div class="tech-tile">
-            <img src="https://cdn.simpleicons.org/githubactions" alt="GitHub Actions" width="48" height="48" loading="lazy">
-            <span>GitHub Actions</span>
-          </div>
+        <div class="tech-categories" aria-label="対応可能技術・連携サービス一覧">
+          <section class="tech-category" aria-labelledby="tech-category-development">
+            <div class="tech-category__head">
+              <h3 id="tech-category-development">言語・フレームワーク・ツール</h3>
+              <p class="tech-category__meta">50件</p>
+            </div>
+            <div class="tech-grid" id="tech-grid-development">
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/python/ffffff" alt="Python" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Python</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/typescript/ffffff" alt="TypeScript" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>TypeScript</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/javascript/ffffff" alt="JavaScript" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>JavaScript</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/nodedotjs/ffffff" alt="Node.js" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Node.js</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/react/ffffff" alt="React" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>React</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/nextdotjs/ffffff" alt="Next.js" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Next.js</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/fastapi/ffffff" alt="FastAPI" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>FastAPI</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/flask/ffffff" alt="Flask" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Flask</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/django/ffffff" alt="Django" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Django</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/express/ffffff" alt="Express" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Express</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/html5/ffffff" alt="HTML5" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>HTML5</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/css3/ffffff" alt="CSS3" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>CSS3</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/jest/ffffff" alt="Jest" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Jest</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/pytest/ffffff" alt="pytest" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>pytest</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/playwright/ffffff" alt="Playwright" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Playwright</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/curl/ffffff" alt="curl" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>curl</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/git/ffffff" alt="Git" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Git</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/bash/ffffff" alt="Bash" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Bash</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/vim/ffffff" alt="Vim" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Vim</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/linux/ffffff" alt="Linux" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Linux</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/windows/ffffff" alt="Windows" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Windows</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/go/ffffff" alt="Go" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Go</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/rust/ffffff" alt="Rust" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Rust</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/php/ffffff" alt="PHP" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>PHP</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/ruby/ffffff" alt="Ruby" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Ruby</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/swift/ffffff" alt="Swift" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Swift</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/kotlin/ffffff" alt="Kotlin" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Kotlin</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/cplusplus/ffffff" alt="C++" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>C++</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/csharp/ffffff" alt="C#" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>C#</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/dotnet/ffffff" alt=".NET" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>.NET</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/laravel/ffffff" alt="Laravel" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Laravel</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/rubyonrails/ffffff" alt="Ruby on Rails" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Ruby on Rails</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/springboot/ffffff" alt="Spring Boot" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Spring Boot</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/vuedotjs/ffffff" alt="Vue.js" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Vue.js</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/angular/ffffff" alt="Angular" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Angular</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/svelte/ffffff" alt="Svelte" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Svelte</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/tailwindcss/ffffff" alt="Tailwind CSS" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Tailwind CSS</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/bootstrap/ffffff" alt="Bootstrap" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Bootstrap</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/vite/ffffff" alt="Vite" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Vite</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/webpack/ffffff" alt="Webpack" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Webpack</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/eslint/ffffff" alt="ESLint" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>ESLint</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/prettier/ffffff" alt="Prettier" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Prettier</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/npm/ffffff" alt="npm" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>npm</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/pnpm/ffffff" alt="pnpm" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>pnpm</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/yarn/ffffff" alt="Yarn" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Yarn</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/storybook/ffffff" alt="Storybook" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Storybook</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/cypress/ffffff" alt="Cypress" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Cypress</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/selenium/ffffff" alt="Selenium" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Selenium</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/graphql/ffffff" alt="GraphQL" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>GraphQL</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/openapiinitiative/ffffff" alt="OpenAPI" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>OpenAPI</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="tech-category" aria-labelledby="tech-category-infra">
+            <div class="tech-category__head">
+              <h3 id="tech-category-infra">インフラ・クラウド・プラットフォーム</h3>
+              <p class="tech-category__meta">33件</p>
+            </div>
+            <div class="tech-grid" id="tech-grid-infra">
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>GitHub</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/githubactions/ffffff" alt="GitHub Actions" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>GitHub Actions</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/docker/ffffff" alt="Docker" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Docker</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/kubernetes/ffffff" alt="Kubernetes" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Kubernetes</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/googlecloud/ffffff" alt="Google Cloud" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Google Cloud</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/amazonaws/ffffff" alt="AWS" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>AWS</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/microsoftazure/ffffff" alt="Microsoft Azure" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Microsoft Azure</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/cloudflare/ffffff" alt="Cloudflare" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Cloudflare</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/vercel/ffffff" alt="Vercel" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Vercel</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/netlify/ffffff" alt="Netlify" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Netlify</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/firebase/ffffff" alt="Firebase" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Firebase</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/supabase/ffffff" alt="Supabase" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Supabase</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/githubpages/ffffff" alt="GitHub Pages" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>GitHub Pages</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/circleci/ffffff" alt="CircleCI" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>CircleCI</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/gitlab/ffffff" alt="GitLab" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>GitLab</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/travisci/ffffff" alt="Travis CI" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Travis CI</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/bitbucket/ffffff" alt="Bitbucket" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Bitbucket</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/terraform/ffffff" alt="Terraform" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Terraform</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/ansible/ffffff" alt="Ansible" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Ansible</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/nginx/ffffff" alt="NGINX" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>NGINX</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/apache/ffffff" alt="Apache" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Apache</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/digitalocean/ffffff" alt="DigitalOcean" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>DigitalOcean</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/heroku/ffffff" alt="Heroku" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Heroku</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/railway/ffffff" alt="Railway" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Railway</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/render/ffffff" alt="Render" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Render</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/flydotio/ffffff" alt="Fly.io" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Fly.io</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/awslambda/ffffff" alt="AWS Lambda" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>AWS Lambda</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/amazons3/ffffff" alt="Amazon S3" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Amazon S3</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/cloudinary/ffffff" alt="Cloudinary" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Cloudinary</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/sentry/ffffff" alt="Sentry" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Sentry</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/datadog/ffffff" alt="Datadog" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Datadog</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/vault/ffffff" alt="Vault" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Vault</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/consul/ffffff" alt="Consul" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Consul</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="tech-category" aria-labelledby="tech-category-services">
+            <div class="tech-category__head">
+              <h3 id="tech-category-services">連携サービス・API・ツール</h3>
+              <p class="tech-category__meta">56件</p>
+            </div>
+            <div class="tech-grid" id="tech-grid-services">
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/discord/ffffff" alt="Discord" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Discord</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/line/ffffff" alt="LINE" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>LINE</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/x/ffffff" alt="X" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>X</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/anthropic/ffffff" alt="Anthropic" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Anthropic</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/openai/ffffff" alt="OpenAI" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>OpenAI</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/googledrive/ffffff" alt="Google Drive" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Google Drive</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/googlecalendar/ffffff" alt="Google Calendar" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Google Calendar</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/gmail/ffffff" alt="Gmail" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Gmail</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/googlesheets/ffffff" alt="Google Sheets" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Google Sheets</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/googleanalytics/ffffff" alt="Google Analytics" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Google Analytics</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/youtube/ffffff" alt="YouTube" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>YouTube</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/instagram/ffffff" alt="Instagram" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Instagram</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/shopify/ffffff" alt="Shopify" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Shopify</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/stripe/ffffff" alt="Stripe" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Stripe</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/paypal/ffffff" alt="PayPal" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>PayPal</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/slack/ffffff" alt="Slack" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Slack</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/zoom/ffffff" alt="Zoom" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Zoom</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/notion/ffffff" alt="Notion" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Notion</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/figma/ffffff" alt="Figma" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Figma</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/trello/ffffff" alt="Trello" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Trello</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/airtable/ffffff" alt="Airtable" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Airtable</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/zapier/ffffff" alt="Zapier" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Zapier</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/n8n/ffffff" alt="n8n" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>n8n</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/make/ffffff" alt="Make" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Make</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/huggingface/ffffff" alt="Hugging Face" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Hugging Face</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/grafana/ffffff" alt="Grafana" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Grafana</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/prometheus/ffffff" alt="Prometheus" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Prometheus</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/redis/ffffff" alt="Redis" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Redis</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/mongodb/ffffff" alt="MongoDB" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>MongoDB</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/postgresql/ffffff" alt="PostgreSQL" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>PostgreSQL</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/mysql/ffffff" alt="MySQL" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>MySQL</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/sqlite/ffffff" alt="SQLite" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>SQLite</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/elasticsearch/ffffff" alt="Elasticsearch" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Elasticsearch</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/kafka/ffffff" alt="Kafka" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Kafka</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/vscode/ffffff" alt="VS Code" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>VS Code</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/cursor/ffffff" alt="Cursor" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Cursor</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/intellijidea/ffffff" alt="IntelliJ IDEA" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>IntelliJ IDEA</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/postman/ffffff" alt="Postman" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Postman</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/microsoftteams/ffffff" alt="Microsoft Teams" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Microsoft Teams</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/jira/ffffff" alt="Jira" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Jira</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/confluence/ffffff" alt="Confluence" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Confluence</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/asana/ffffff" alt="Asana" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Asana</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/mailchimp/ffffff" alt="Mailchimp" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Mailchimp</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/sendgrid/ffffff" alt="SendGrid" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>SendGrid</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/twilio/ffffff" alt="Twilio" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Twilio</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/hubspot/ffffff" alt="HubSpot" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>HubSpot</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/salesforce/ffffff" alt="Salesforce" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Salesforce</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/dropbox/ffffff" alt="Dropbox" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Dropbox</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/googlemaps/ffffff" alt="Google Maps" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Google Maps</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/tiktok/ffffff" alt="TikTok" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>TikTok</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/linkedin/ffffff" alt="LinkedIn" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>LinkedIn</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/wordpress/ffffff" alt="WordPress" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>WordPress</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/woocommerce/ffffff" alt="WooCommerce" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>WooCommerce</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/algolia/ffffff" alt="Algolia" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Algolia</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/rabbitmq/ffffff" alt="RabbitMQ" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>RabbitMQ</span>
+              </div>
+              <div class="tech-tile">
+                <img src="https://cdn.simpleicons.org/snowflake/ffffff" alt="Snowflake" width="40" height="40" onerror="this.style.display='none'" loading="lazy">
+                <span>Snowflake</span>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </section>
