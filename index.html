@@ -39,6 +39,7 @@
 
     body {
       margin: 0;
+      padding-top: 72px;
       font-family: Inter, 'Noto Sans JP', sans-serif;
       color: var(--ink);
       background: var(--white);
@@ -63,9 +64,11 @@
     }
 
     .site-header {
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 50;
+      left: 0;
+      right: 0;
+      z-index: 1000;
       background: rgba(255, 255, 255, 0.96);
       border-bottom: 1px solid var(--line);
       backdrop-filter: blur(12px);
@@ -105,6 +108,7 @@
     .site-nav a {
       padding: 8px 10px;
       border-radius: 8px;
+      white-space: nowrap;
       transition: color 0.2s ease, background 0.2s ease;
     }
 
@@ -204,6 +208,7 @@
 
     main section {
       padding: 92px 0;
+      scroll-margin-top: 72px;
     }
 
     .section-head {
@@ -527,15 +532,39 @@
     }
 
     @media (max-width: 680px) {
+      body {
+        padding-top: 64px;
+      }
+
       .container {
         width: min(100% - 32px, 1120px);
       }
 
       .site-header__inner {
-        min-height: auto;
-        padding: 14px 0;
-        align-items: flex-start;
-        flex-direction: column;
+        min-height: 64px;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .site-logo {
+        flex: 0 0 auto;
+      }
+
+      .site-nav {
+        flex: 1 1 auto;
+        flex-wrap: nowrap;
+        gap: 6px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .site-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .site-nav a {
+        flex: 0 0 auto;
+        padding: 6px 8px;
       }
 
       .hero {
@@ -557,6 +586,7 @@
 
       main section {
         padding: 68px 0;
+        scroll-margin-top: 64px;
       }
 
       h2 {
@@ -595,16 +625,19 @@
   </style>
 </head>
 <body>
-  <header class="site-header">
+  <nav id="site-nav" class="site-header" aria-label="Primary navigation">
     <div class="container site-header__inner">
-      <a class="site-logo" href="/">AI Agent Lab</a>
-      <nav class="site-nav" aria-label="Primary navigation">
+      <a class="site-logo" href="#hero">AI Agent Lab</a>
+      <div class="site-nav">
+        <a href="#services">Services</a>
+        <a href="#tech-stack">Tech</a>
+        <a href="#results">Results</a>
         <a href="/blog/">Blog</a>
         <a href="https://note.com/aiagentlab_jp" target="_blank" rel="noopener">Note</a>
         <a href="https://x.com/AIAgentLab_JP" target="_blank" rel="noopener">X</a>
-      </nav>
+      </div>
     </div>
-  </header>
+  </nav>
 
   <main>
     <section class="hero" id="hero">
