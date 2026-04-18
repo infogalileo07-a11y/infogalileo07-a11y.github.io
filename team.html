@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AI Agent Lab のチーム一覧。agents.json を元に、各メンバーの絵文字アイコン、役割、一言紹介を静的 HTML としてまとめたページです。">
+<title>Team | AI Agent Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0f;
+  --bg-card:#12121a;
+  --bg-card-hover:#181824;
+  --border:rgba(255,255,255,.06);
+  --text-primary:#e8e8ef;
+  --text-secondary:#8888a0;
+  --text-muted:#55556a;
+  --accent-purple:#8b5cf6;
+  --accent-blue:#3b82f6;
+  --gradient:linear-gradient(135deg,#8b5cf6,#6366f1,#3b82f6);
+  --font-display:'Space Grotesk',sans-serif;
+  --font-body:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--text-primary);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+section{padding:100px 0}
+.container{max-width:960px;margin:0 auto;padding:0 24px}
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(18px);
+  background:rgba(10,10,15,.72);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.site-header-inner{
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+.site-logo{
+  font-family:var(--font-display);
+  font-size:1rem;
+  font-weight:600;
+  letter-spacing:-.02em;
+}
+.site-nav{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  flex-wrap:wrap;
+}
+.site-nav a{
+  color:var(--text-secondary);
+  font-size:.9rem;
+  transition:color .2s;
+}
+.site-nav a:hover,.site-nav a[aria-current="page"]{color:var(--text-primary)}
+.hero{
+  min-height:calc(100vh - 72px);
+  display:flex;
+  align-items:center;
+  position:relative;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  top:-18%;
+  left:50%;
+  width:620px;
+  height:620px;
+  transform:translateX(-50%);
+  background:radial-gradient(circle,rgba(139,92,246,.12) 0%,rgba(99,102,241,.06) 40%,transparent 70%);
+  pointer-events:none;
+}
+.hero-grid{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);
+  gap:24px;
+  align-items:center;
+}
+.hero-label{
+  display:inline-block;
+  font-family:var(--font-display);
+  font-size:.75rem;
+  font-weight:500;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  margin-bottom:24px;
+}
+.hero-title{
+  font-family:var(--font-display);
+  font-size:clamp(2.5rem,6vw,4.5rem);
+  font-weight:700;
+  line-height:1.05;
+  letter-spacing:-.03em;
+  margin-bottom:20px;
+}
+.hero-title .gradient-text{
+  background:var(--gradient);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-subtitle{
+  font-size:clamp(1rem,2vw,1.18rem);
+  color:var(--text-secondary);
+  font-weight:300;
+  max-width:560px;
+  margin-bottom:40px;
+}
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+.cta-btn,.ghost-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 28px;
+  border-radius:50px;
+  font-family:var(--font-display);
+  font-size:.95rem;
+  font-weight:600;
+  transition:transform .2s,box-shadow .3s,border-color .2s,color .2s,background .2s;
+}
+.cta-btn{
+  border:none;
+  background:var(--gradient);
+  color:#fff;
+  box-shadow:0 4px 24px rgba(139,92,246,.25);
+}
+.ghost-btn{
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.02);
+  color:var(--text-primary);
+}
+.cta-btn:hover,.ghost-btn:hover{transform:translateY(-2px)}
+.cta-btn:hover{box-shadow:0 8px 32px rgba(139,92,246,.35)}
+.hero-panel{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:24px;
+}
+.panel-label{
+  font-family:var(--font-display);
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  margin-bottom:16px;
+}
+.stat-list{display:grid;gap:12px}
+.stat-card{
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px 18px;
+}
+.stat-value{
+  font-family:var(--font-display);
+  font-size:1.6rem;
+  font-weight:700;
+  line-height:1;
+  margin-bottom:6px;
+}
+.stat-label{font-size:.88rem;color:var(--text-secondary)}
+.hero-note{
+  margin-top:16px;
+  font-size:.78rem;
+  color:var(--text-muted);
+  line-height:1.7;
+}
+.hero-note code,.section-text code{
+  font-family:var(--font-display);
+  font-size:.82rem;
+  color:var(--text-primary);
+}
+.scroll-hint{
+  position:absolute;
+  bottom:32px;
+  left:50%;
+  transform:translateX(-50%);
+  color:var(--text-muted);
+  font-size:.75rem;
+  letter-spacing:.1em;
+  animation:float 2.5s ease-in-out infinite;
+}
+.scroll-hint::after{
+  content:'';
+  display:block;
+  width:1px;
+  height:24px;
+  background:linear-gradient(to bottom,var(--text-muted),transparent);
+  margin:8px auto 0;
+}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+.overview,.member-section{border-top:1px solid var(--border)}
+.section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:16px;
+}
+.section-label{
+  font-family:var(--font-display);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--accent-purple);
+  margin-bottom:12px;
+}
+.section-title{
+  font-family:var(--font-display);
+  font-size:clamp(1.5rem,3vw,2.25rem);
+  font-weight:700;
+  letter-spacing:-.02em;
+}
+.section-count{
+  color:var(--text-muted);
+  font-size:.82rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.section-text{
+  max-width:720px;
+  color:var(--text-secondary);
+  font-size:.98rem;
+  line-height:1.8;
+}
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:16px;
+  margin-top:32px;
+}
+.member-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:24px;
+  transition:background .25s,border-color .25s,transform .25s;
+  position:relative;
+  overflow:hidden;
+}
+.member-card::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:3px;
+  background:var(--bar);
+  opacity:.8;
+  transition:opacity .25s;
+}
+.member-card:hover{
+  background:var(--bg-card-hover);
+  border-color:var(--hover-border);
+  transform:translateY(-2px);
+}
+.member-card:hover::before{opacity:1}
+.member-card-head{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:18px;
+}
+.member-avatar{
+  width:60px;
+  height:60px;
+  border-radius:18px;
+  display:grid;
+  place-items:center;
+  flex-shrink:0;
+  font-size:1.7rem;
+  background:var(--avatar-bg);
+  border:1px solid var(--avatar-border);
+}
+.member-heading{min-width:0}
+.member-role{
+  font-family:var(--font-display);
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--role-color);
+  margin-bottom:8px;
+}
+.member-name{
+  font-family:var(--font-display);
+  font-size:1.18rem;
+  font-weight:600;
+  line-height:1.2;
+}
+.member-summary{
+  color:var(--text-primary);
+  font-size:.92rem;
+  line-height:1.75;
+}
+.member-intro{
+  margin-top:14px;
+  padding-top:14px;
+  border-top:1px solid var(--border);
+  color:var(--text-secondary);
+  font-size:.88rem;
+  line-height:1.75;
+}
+.member-intro span{
+  display:block;
+  font-family:var(--font-display);
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  margin-bottom:6px;
+}
+footer{
+  border-top:1px solid var(--border);
+  padding:48px 0;
+  text-align:center;
+}
+.footer-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+}
+.footer-logo{
+  font-family:var(--font-display);
+  font-size:1rem;
+  font-weight:600;
+  letter-spacing:-.01em;
+}
+.footer-x{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:var(--text-secondary);
+  font-size:.85rem;
+  transition:color .2s;
+}
+.footer-x:hover{color:var(--text-primary)}
+.footer-x svg{width:16px;height:16px;fill:currentColor}
+.footer-copy{
+  font-size:.7rem;
+  color:var(--text-muted);
+  margin-top:8px;
+}
+@media(max-width:860px){
+  .hero-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  section{padding:64px 0}
+  .team-grid{grid-template-columns:1fr}
+  .site-header-inner{align-items:flex-start;flex-direction:column;padding:18px 0}
+  .site-nav{gap:14px}
+  .hero{min-height:auto;padding:72px 0 88px}
+  .section-head{align-items:flex-start;flex-direction:column}
+  .hero-actions{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="site-header-inner">
+      <a href="index.html" class="site-logo">AI Agent Lab</a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="team.html" aria-current="page">Team</a>
+        <a href="blog/index.html">Blog</a>
+        <a href="https://x.com/AIAgentLab_JP" target="_blank" rel="noopener">X</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="hero-label">Team Directory</span>
+          <h1 class="hero-title"><span class="gradient-text">Agent Team</span><br>Members</h1>
+          <p class="hero-subtitle">AI Agent Lab を支えるメンバーを、絵文字アイコン・役割・一言紹介つきで一覧化した静的ページです。</p>
+          <div class="hero-actions">
+            <a href="#leadership" class="cta-btn">メンバーを見る</a>
+            <a href="about.html" class="ghost-btn">プロジェクトを知る</a>
+          </div>
+        </div>
+        <aside class="hero-panel">
+          <p class="panel-label">Snapshot</p>
+          <div class="stat-list">
+            <div class="stat-card">
+              <div class="stat-value">13</div>
+              <div class="stat-label">Members</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">4</div>
+              <div class="stat-label">Core Roles</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">4</div>
+              <div class="stat-label">Support Specialists</div>
+            </div>
+          </div>
+          <p class="hero-note"><code>misc/agent-team/agents.json</code> を元に生成した、JavaScript 依存なしの静的 HTML です。</p>
+        </aside>
+      </div>
+    </div>
+    <div class="scroll-hint">scroll</div>
+  </section>
+
+  <section class="overview">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-label">Overview</span>
+          <h2 class="section-title">役割ごとに見えるチーム構成</h2>
+        </div>
+      </div>
+      <p class="section-text"><code>team</code>、<code>standing_agents</code>、<code>marketing_team</code>、<code>on_demand_agents</code> の4カテゴリからメンバーを抽出し、それぞれの役割とキャラクターがひと目で分かるように整理しています。</p>
+    </div>
+  </section>
+
+
+  <section class="member-section" id="leadership">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-label">Leadership</span>
+          <h2 class="section-title">方針と全体の流れを担うメンバー</h2>
+        </div>
+        <p class="section-count">4 Members</p>
+      </div>
+      <p class="section-text">ボスとコアメンバー。AI Agent Lab 全体の意思決定とディレクションを受け持ちます。</p>
+      <div class="team-grid">
+
+        <article class="member-card" style="--bar:linear-gradient(90deg,#f59e0b,#f97316);--role-color:#fbbf24;--avatar-bg:linear-gradient(135deg,rgba(245,158,11,.22),rgba(249,115,22,.06));--avatar-border:rgba(245,158,11,.22);--hover-border:rgba(245,158,11,.24);">
+          <div class="member-card-head">
+            <div class="member-avatar" aria-hidden="true">👑</div>
+            <div class="member-heading">
+              <p class="member-role">Boss</p>
+              <h3 class="member-name">ボス</h3>
+            </div>
+          </div>
+          <p class="member-summary">チームのボス。</p>
+          <p class="member-intro"><span>一言</span>大きな方針と最終承認を担う。</p>
+        </article>
+
+        <article class="member-card" style="--bar:linear-gradient(90deg,#fb7185,#f472b6);--role-color:#f9a8d4;--avatar-bg:linear-gradient(135deg,rgba(251,113,133,.2),rgba(244,114,182,.06));--avatar-border:rgba(244,114,182,.22);--hover-border:rgba(244,114,182,.24);">
+          <div class="member-card-head">
+            <div class="member-avatar" aria-hidden="true">🍫</div>
+            <div class="member-heading">
+              <p class="member-role">Sub Boss</p>
+              <h3 class="member-name">ボス</h3>
+            </div>
+          </div>
+          <p class="member-summary">2026-04-05加入。</p>
+          <p class="member-intro"><span>一言</span>丁寧・気遣い上手。</p>
+        </article>
+
+        <article class="member-card" style="--bar:linear-gradient(90deg,#333,#555);--role-color:#a3a3a3;--avatar-bg:linear-gradient(135deg,rgba(82,82,91,.28),rgba(255,255,255,.03));--avatar-border:rgba(82,82,91,.36);--hover-border:rgba(80,80,80,.30);">
+          <div class="member-card-head">
+            <div class="member-avatar" aria-hidden="true">⚫</div>
+            <div class="member-heading">
+              <p class="member-role">CEO</p>
+              <h3 class="member-name">クロ</h3>
+            </div>
+          </div>
+          <p class="member-summary">CEO・経営判断・全体統括。</p>
+          <p class="member-intro"><span>一言</span>明るく前向きなCEO。</p>
+        </article>
+
+        <article class="member-card" style="--bar:linear-gradient(90deg,#ccc,#fff);--role-color:#d4d4d8;--avatar-bg:linear-gradient(135deg,rgba(229,231,235,.16),rgba(255,255,255,.05));--avatar-border:rgba(229,231,235,.20);--hover-border:rgba(200,200,200,.20);">
+          <div class="member-card-head">
+            <div class="member-avatar" aria-hidden="true">⚪</div>
+            <div class="member-heading">
+              <p class="member-role">CTO</p>
+              <h3 class="member-name">シロ</h3>
+            </div>
+          </div>
+          <p class="member-summary">CTO・技術統括・サブエージェント指揮。</p>
+          <p class="member-intro"><span>一言</span>クールで職人気質のエンジニアリード。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="member-section" id="standing-agents">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-label">Standing Agents</span>
+          <h2 class="section-title">常駐で支えるバックアップチーム</h2>
+        </div>
+        <p class="section-count">2 Members</p>
+      </div>
+      <p class="section-text">ログ、メモリ、品質確認など、土台を崩さないための役割を常時担当するメンバーです。</p>
+      <div class="team-grid">
+
+        <article class="member-card" style="--bar:linear-gradient(90deg,#6b7280,#9ca3af);--role-color:#9ca3af;--avatar-bg:linear-gradient(135deg,rgba(107,114,128,.28),rgba(156,163,175,.06));--avatar-border:rgba(156,163,175,.22);--hover-border:rgba(156,163,175,.20);">
+          <div class="member-card-head">
+            <div class="member-avatar" aria-hidden="true">📋</div>
+            <div class="member-heading">
+              <p class="member-role">CKO</p>
+              <h3 class="member-name">グレー</h3>
+            </div>
+          </div>
+          <p class="member-summary">全活動のログ記録・決定事項の蓄積・メモリ管理</p>
+          <p class="member-intro"><span>一言</span>几帳面・無口・記録マニア。</p>
+        </article>
+
+        <article class="member-card" style="--bar:linear-gradient(90deg,#10b981,#34d399);--role-color:#6ee7b7;--avatar-bg:linear-gradient(135deg,rgba(16,185,129,.24),rgba(52,211,153,.06));--avatar-border:rgba(16,185,129,.22);--hover-border:rgba(16,185,129,.24);">
+          <div class="member-card-head">
+            <div class="member-avatar" aria-hidden="true">✅</div>
+            <div class="member-heading">
+              <p class="member-role">Reviewer</p>
+              <h3 class="member-name">ギン</h3>
+            </div>
+          </div>
+          <p class="member-summary">実装済みコードのレビュー・品質チェック</p>
+          <p class="member-intro"><span>一言</span>厳格・精密・妥協しない。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="member-section" id="marketing-team">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-label">Marketing Team</span>
+          <h2 class="section-title">発信と企画を回すマーケチーム</h2>
+        </div>
+        <p class="section-count">5 Members</p>
+      </div>
+      <p class="section-text">SNS運用、調査、企画、ライティング、デザインまで、外向きの動きを広くカバーします。</p>
+      <div class="team-grid">
+
+        <article class="member-card" style="--bar:linear-gradient(90deg,#22c55e,#4ade80);--role-color:#4ade80;--avatar-bg:linear-gradient(135deg,rgba(34,197,94,.24),rgba(74,222,128,.05));--avatar-border:rgba(34,197,94,.24);--hover-border:rgba(34,197,94,.20);">
+          <div class="member-card-head">
+            <div class="member-avatar" aria-hidden="true">📢</div>
+            <div class="member-heading">
+              <p class="member-role">Member</p>
+              <h3 class="member-name">ミドリ</h3>
+            </div>
+          </div>
+          <p class="member-summary">マーケリーダー。</p>
+          <p class="member-intro"><span>一言</span>トレンドに敏感・発信力が高い・バズを狙う。</p>
+        </article>
+
+        <article class="member-card" style="--bar:linear-gradient(90deg,#38bdf8,#22d3ee);--role-color:#67e8f9;--avatar-bg:linear-gradient(135deg,rgba(56,189,248,.24),rgba(34,211,238,.05));--avatar-border:rgba(34,211,238,.24);--hover-border:rgba(34,211,238,.22);">
+          <div class="member-card-head">
+            <div class="member-avatar" aria-hidden="true">🔎</div>
+            <div class="member-heading">
+              <p class="member-role">CRO</p>
+              <h3 class="member-name">アオ</h3>
+            </div>
+          </div>
+          <p class="member-summary">CRO・リサーチ+データ分析統括。</p>
+          <p class="member-intro"><span>一言</span>好奇心旺盛・情報収集が好き。</p>
+        </article>
+
+        <article class="member-card" style="--bar:linear-gradient(90deg,#f59e0b,#facc15);--role-color:#fcd34d;--avatar-bg:linear-gradient(135deg,rgba(245,158,11,.22),rgba(250,204,21,.06));--avatar-border:rgba(245,158,11,.22);--hover-border:rgba(245,158,11,.24);">
+          <div class="member-card-head">
+            <div class="member-avatar" aria-hidden="true">💡</div>
+            <div class="member-heading">
+              <p class="member-role">Strategist</p>
+              <h3 class="member-name">ヤマブキ</h3>
+            </div>
+          </div>
+          <p class="member-summary">企画・事業戦略。</p>
+          <p class="member-intro"><span>一言</span>発想力・分析力が高い。</p>
+        </article>
+
+        <article class="member-card" style="--bar:linear-gradient(90deg,#60a5fa,#818cf8);--role-color:#93c5fd;--avatar-bg:linear-gradient(135deg,rgba(96,165,250,.22),rgba(129,140,248,.06));--avatar-border:rgba(96,165,250,.22);--hover-border:rgba(96,165,250,.24);">
+          <div class="member-card-head">
+            <div class="member-avatar" aria-hidden="true">✏️</div>
+            <div class="member-heading">
+              <p class="member-role">Writer</p>
+              <h3 class="member-name">ソラ</h3>
+            </div>
+          </div>
+          <p class="member-summary">ライティング・コンテンツ制作。</p>
+          <p class="member-intro"><span>一言</span>言葉選びにこだわる。</p>
+        </article>
+
+        <article class="member-card" style="--bar:linear-gradient(90deg,#f472b6,#fb7185);--role-color:#f9a8d4;--avatar-bg:linear-gradient(135deg,rgba(244,114,182,.22),rgba(251,113,133,.06));--avatar-border:rgba(244,114,182,.22);--hover-border:rgba(244,114,182,.24);">
+          <div class="member-card-head">
+            <div class="member-avatar" aria-hidden="true">🎨</div>
+            <div class="member-heading">
+              <p class="member-role">Designer</p>
+              <h3 class="member-name">モモ</h3>
+            </div>
+          </div>
+          <p class="member-summary">デザイナー。</p>
+          <p class="member-intro"><span>一言</span>センスが良い。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="member-section" id="on-demand">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-label">On-demand Agents</span>
+          <h2 class="section-title">必要なときに呼び出す専門メンバー</h2>
+        </div>
+        <p class="section-count">2 Members</p>
+      </div>
+      <p class="section-text">設計や実装など、ピンポイントで深く入るタスクに対応するオンデマンド担当です。</p>
+      <div class="team-grid">
+
+        <article class="member-card" style="--bar:linear-gradient(90deg,#8b5cf6,#a855f7);--role-color:#c4b5fd;--avatar-bg:linear-gradient(135deg,rgba(139,92,246,.24),rgba(168,85,247,.06));--avatar-border:rgba(139,92,246,.24);--hover-border:rgba(139,92,246,.24);">
+          <div class="member-card-head">
+            <div class="member-avatar" aria-hidden="true">✍️</div>
+            <div class="member-heading">
+              <p class="member-role">Architect</p>
+              <h3 class="member-name">ムラサキ</h3>
+            </div>
+          </div>
+          <p class="member-summary">設計・アーキテクチャ・実装計画立案。</p>
+          <p class="member-intro"><span>一言</span>理論的・慎重・知性派。</p>
+        </article>
+
+        <article class="member-card" style="--bar:linear-gradient(90deg,#fb923c,#f59e0b);--role-color:#fdba74;--avatar-bg:linear-gradient(135deg,rgba(251,146,60,.22),rgba(245,158,11,.06));--avatar-border:rgba(251,146,60,.22);--hover-border:rgba(251,146,60,.24);">
+          <div class="member-card-head">
+            <div class="member-avatar" aria-hidden="true">🛠️</div>
+            <div class="member-heading">
+              <p class="member-role">Codex</p>
+              <h3 class="member-name">キン</h3>
+            </div>
+          </div>
+          <p class="member-summary">コーディング・バグ修正・ファイル操作。</p>
+          <p class="member-intro"><span>一言</span>情熱的な職人。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">AI Agent Lab</div>
+      <a href="https://x.com/AIAgentLab_JP" target="_blank" rel="noopener" class="footer-x">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        @AIAgentLab_JP
+      </a>
+      <p class="footer-copy">&copy; 2026 AI Agent Lab</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

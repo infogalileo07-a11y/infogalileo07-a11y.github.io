@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+*.png
+*.jpg
+*.jpeg
+*.gif
+build_blog.py
+build_team.py
+generate_post.py
+content/

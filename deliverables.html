@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>制作物一覧</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Hiragino Sans', sans-serif; background: #0f0f13; color: #e0e0e0; padding: 20px; }
+  h1 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .subtitle { font-size: 12px; color: #555; margin-bottom: 28px; }
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 12px; font-weight: 700; color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #222; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+  .card { background: #1a1a22; border-radius: 8px; padding: 14px 16px; border-left: 3px solid #333; transition: border-color 0.2s; }
+  .card:hover { border-left-color: #818cf8; }
+  .card-title { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .card-desc { font-size: 11px; color: #666; line-height: 1.5; margin-bottom: 8px; }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 4px; }
+  .tag { font-size: 10px; padding: 1px 6px; border-radius: 10px; }
+  .tag-sales   { background: #2a1a00; color: #fbbf24; }
+  .tag-tool    { background: #0a2a1a; color: #34d399; }
+  .tag-design  { background: #1a0a2a; color: #c084fc; }
+  .tag-data    { background: #0a1a2a; color: #60a5fa; }
+  .tag-app     { background: #2a0a1a; color: #f472b6; }
+  .tag-web     { background: #0a2a2a; color: #2dd4bf; }
+  .tag-content { background: #1a1a00; color: #a3e635; }
+  .tag-pub     { background: #0a1a0a; color: #4ade80; }
+  .tag-local   { background: #222; color: #666; }
+  .note { font-size: 10px; color: #f87171; margin-top: 4px; }
+  .note-pub { font-size: 10px; color: #4ade80; margin-top: 4px; }
+  a.card-link { text-decoration: none; color: #818cf8; font-size: 10px; display: inline-block; margin-top: 4px; }
+  a.card-link:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    body { padding: 12px; }
+    h1 { font-size: 17px; }
+    .grid { grid-template-columns: 1fr; }
+    .section-title { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+<h1>📦 チーム制作物一覧</h1>
+<p class="subtitle">更新: 2026-04-12 | 管理: ハル | ★=GitHub Pages公開済み</p>
+
+<!-- ===== GitHub Pages 公開済み ===== -->
+<div class="section">
+  <div class="section-title">🌐 GitHub Pages 公開済み（URLで共有可）</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-title">AI Agent Lab トップ</div>
+      <div class="card-desc">チームの公式サイト。活動紹介・ブログ・チームメンバーページ。</div>
+      <div class="card-tags"><span class="tag tag-web">Web</span><span class="tag tag-pub">★公開</span></div>
+      <a class="card-link" href="https://infogalileo07-a11y.github.io/ai-agent-lab/" target="_blank">↗ ai-agent-lab/</a>
+    </div>
+    <div class="card">
+      <div class="card-title">チームメンバー紹介</div>
+      <div class="card-desc">クロ・シロ・アオ・ミドリ・ハル各メンバーのプロフィールページ。</div>
+      <div class="card-tags"><span class="tag tag-web">Web</span><span class="tag tag-pub">★公開</span></div>
+      <a class="card-link" href="https://infogalileo07-a11y.github.io/ai-agent-lab/team.html" target="_blank">↗ team.html</a>
+    </div>
+    <div class="card">
+      <div class="card-title">ブログ（note連携）</div>
+      <div class="card-desc">ep01〜ep46のシリーズ記事ページ。AIエージェントチームの成長記録。</div>
+      <div class="card-tags"><span class="tag tag-content">コンテンツ</span><span class="tag tag-pub">★公開</span></div>
+      <a class="card-link" href="https://infogalileo07-a11y.github.io/ai-agent-lab/blog/" target="_blank">↗ blog/</a>
+    </div>
+    <div class="card">
+      <div class="card-title">CLAUDE.mdジェネレーター</div>
+      <div class="card-desc">誰でも使えるCLAUDE.md自動生成ツール。外部向けツールとして公開中。</div>
+      <div class="card-tags"><span class="tag tag-tool">ツール</span><span class="tag tag-pub">★公開</span></div>
+      <a class="card-link" href="https://infogalileo07-a11y.github.io/ai-agent-lab/generator/" target="_blank">↗ generator/</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 営業・提案資料 ===== -->
+<div class="section">
+  <div class="section-title">🤝 営業・提案資料</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-title">AIエージェント営業デッキ</div>
+      <div class="card-desc">チームのサービス内容・価値提案をまとめた汎用営業資料。toB向け。</div>
+      <div class="card-tags"><span class="tag tag-sales">営業</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: sales_deck.html</div>
+    </div>
+    <div class="card">
+      <div class="card-title">営業LP（汎用）</div>
+      <div class="card-desc">外部向けランディングページ。シンプルな自己紹介・サービス紹介。</div>
+      <div class="card-tags"><span class="tag tag-sales">営業</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: sales_intro.html</div>
+    </div>
+    <div class="card">
+      <div class="card-title">toB営業資料</div>
+      <div class="card-desc">企業向け提案書。AIエージェント導入の価値・事例・見積もり構成。</div>
+      <div class="card-tags"><span class="tag tag-sales">営業</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: toB_sales_doc.html</div>
+    </div>
+    <div class="card">
+      <div class="card-title">RxPro向け提案書</div>
+      <div class="card-desc">ボスのいとこ・二川さん（RxPro代表）への連携提案。スカウト自動化・アタックリスト収集。</div>
+      <div class="card-tags"><span class="tag tag-sales">営業</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: rxpro_sales.html</div>
+    </div>
+    <div class="card">
+      <div class="card-title">WeYouグループ向け提案書</div>
+      <div class="card-desc">WeYouグループへのAIエージェント活用提案。</div>
+      <div class="card-tags"><span class="tag tag-sales">営業</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: rxpro_weyou.html</div>
+    </div>
+    <div class="card">
+      <div class="card-title">WeYouグループ議事録</div>
+      <div class="card-desc">WeYouグループとの打ち合わせ議事録。</div>
+      <div class="card-tags"><span class="tag tag-sales">営業</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: wiiugroup_minutes.html</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MyFaceLab ===== -->
+<div class="section">
+  <div class="section-title">💄 MyFaceLab（スキンケアAIアプリ）</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-title">MyFaceLab MVP</div>
+      <div class="card-desc">肌診断AIアプリのMVP仕様書・インタラクティブモックアップ。</div>
+      <div class="card-tags"><span class="tag tag-app">アプリ</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: myfacelab_mvp.html</div>
+    </div>
+    <div class="card">
+      <div class="card-title">MyFaceLab モックアップ v1/v2</div>
+      <div class="card-desc">ホーム・カメラ・診断結果・コスメ・マイページの画面設計。</div>
+      <div class="card-tags"><span class="tag tag-app">アプリ</span><span class="tag tag-design">デザイン</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: myfacelab_mock.html / myfacelab_mock_v2.html</div>
+    </div>
+    <div class="card">
+      <div class="card-title">MyFaceLab カラー診断</div>
+      <div class="card-desc">パーソナルカラー診断画面のUIデザイン。</div>
+      <div class="card-tags"><span class="tag tag-app">アプリ</span><span class="tag tag-design">デザイン</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: myfacelab_color_v2.html</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Face Lab ブランドモックアップ</div>
+      <div class="card-desc">Bluve・iebe各ブランドの春夏秋冬シーズン別デザイン案。</div>
+      <div class="card-tags"><span class="tag tag-design">デザイン</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: mockup_face_lab_*.html（8種）</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== スティッカー・シールアプリ ===== -->
+<div class="section">
+  <div class="section-title">🎮 スタンプ・シールアプリ</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-title">スタンプアプリ提案書</div>
+      <div class="card-desc">LINEスタンプ連携アプリの事業提案・収益モデル・実装仕様。</div>
+      <div class="card-tags"><span class="tag tag-app">アプリ</span><span class="tag tag-sales">営業</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: sticker_app_proposal.html</div>
+    </div>
+    <div class="card">
+      <div class="card-title">スタンプアプリ モックアップ</div>
+      <div class="card-desc">ガチャ・コレクション・交換機能のUIモックアップ。</div>
+      <div class="card-tags"><span class="tag tag-app">アプリ</span><span class="tag tag-design">デザイン</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: sticker_app_mock.html / sticker_app.html</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Seal App モックアップ</div>
+      <div class="card-desc">シールアプリのホーム・ガチャ・コレクション・交換・マイページ。</div>
+      <div class="card-tags"><span class="tag tag-app">アプリ</span><span class="tag tag-design">デザイン</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: seal_app_mock.html</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LPサンプル ===== -->
+<div class="section">
+  <div class="section-title">🖥️ LPデザインサンプル</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-title">Apple風LP</div>
+      <div class="card-desc">Apple UIをモチーフにしたLPデザインサンプル。</div>
+      <div class="card-tags"><span class="tag tag-design">デザイン</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: lp_apple_sample.html / sample_apple.html</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Claude風LP</div>
+      <div class="card-desc">Anthropic Claude UIをモチーフにしたデザインサンプル。</div>
+      <div class="card-tags"><span class="tag tag-design">デザイン</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: sample_claude.html</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Linear / Stripe 風LP</div>
+      <div class="card-desc">B2B SaaS系デザインのLPサンプル集。</div>
+      <div class="card-tags"><span class="tag tag-design">デザイン</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: sample_linear.html / sample_stripe.html</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== チーム運用ツール ===== -->
+<div class="section">
+  <div class="section-title">🛠️ チーム運用ツール</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-title">タスクボード</div>
+      <div class="card-desc">未着手・承認待ち・完了タスクをカンバン形式で表示。write_task_board.pyで自動生成。</div>
+      <div class="card-tags"><span class="tag tag-tool">ツール</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: task_board.html / task_board_done.html</div>
+    </div>
+    <div class="card">
+      <div class="card-title">チームダッシュボード</div>
+      <div class="card-desc">bot稼働状態・タスク・KPIをリアルタイム表示。bot_manager.pyに統合予定。</div>
+      <div class="card-tags"><span class="tag tag-tool">ツール</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: dashboard.html（dashboard_server.py経由）</div>
+    </div>
+    <div class="card">
+      <div class="card-title">アーキテクチャ図</div>
+      <div class="card-desc">チームのシステム全体構成図。</div>
+      <div class="card-tags"><span class="tag tag-tool">ツール</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: architecture.html</div>
+    </div>
+    <div class="card">
+      <div class="card-title">マインドマップツール</div>
+      <div class="card-desc">インタラクティブなマインドマップ作成ツール（mind-elixirベース）。</div>
+      <div class="card-tags"><span class="tag tag-tool">ツール</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: mindmap_v3.html</div>
+    </div>
+    <div class="card">
+      <div class="card-title">CELLESTマインドマップ</div>
+      <div class="card-desc">CELLESTクライアント向けの事業整理マインドマップ。</div>
+      <div class="card-tags"><span class="tag tag-tool">ツール</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: cellest_mindmap.html</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 分析・データ ===== -->
+<div class="section">
+  <div class="section-title">📊 分析・データビジュアライズ</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-title">Instagramダッシュボード</div>
+      <div class="card-desc">Instagram投稿のエンゲージメント・リーチ・フォロワー推移を可視化。</div>
+      <div class="card-tags"><span class="tag tag-data">データ</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: instagram_dashboard_pro.html</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Instagram週次モックアップ</div>
+      <div class="card-desc">週次Instagramレポートのモックアップ・GASシート連携版。</div>
+      <div class="card-tags"><span class="tag tag-data">データ</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: instagram_weekly_mockup.html / instagram_sheet_mockup.html</div>
+    </div>
+    <div class="card">
+      <div class="card-title">KPIツリー</div>
+      <div class="card-desc">チームKPI・GMV KPIの構造を可視化したツリー図。</div>
+      <div class="card-tags"><span class="tag tag-data">データ</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: kpi_tree.html / gmv_kpi_tree.html</div>
+    </div>
+    <div class="card">
+      <div class="card-title">ロジックツリー</div>
+      <div class="card-desc">課題分析のロジックツリー図。</div>
+      <div class="card-tags"><span class="tag tag-data">データ</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: logic_tree.html</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HPデザイン ===== -->
+<div class="section">
+  <div class="section-title">🎨 HPリデザイン</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-title">HPリデザイン案</div>
+      <div class="card-desc">チームHPのリデザインモックアップ。</div>
+      <div class="card-tags"><span class="tag tag-design">デザイン</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">ファイル: hp_redesign.html</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== コンテンツ ===== -->
+<div class="section">
+  <div class="section-title">✍️ ブログ記事（note掲載済み / 予定）</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-title">AIエージェントチームブログ ep01〜ep46</div>
+      <div class="card-desc">チームの日常・技術・失敗・成長を記録したシリーズ記事。Markdownファイルとして保存済み。GitHub Pages blog/ページからも閲覧可。</div>
+      <div class="card-tags"><span class="tag tag-content">コンテンツ</span><span class="tag tag-pub">★一部公開</span></div>
+      <div class="note">場所: misc/agent-team/content/blog_ep*.md</div>
+      <a class="card-link" href="https://infogalileo07-a11y.github.io/ai-agent-lab/blog/" target="_blank">↗ ブログページ</a>
+    </div>
+    <div class="card">
+      <div class="card-title">noteエントリ（draft含む）</div>
+      <div class="card-desc">note_001, 034, launch_article, day1_dev_diary等の下書き・完成版。</div>
+      <div class="card-tags"><span class="tag tag-content">コンテンツ</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">場所: misc/agent-team/content/note_*.md</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Zennコンテンツ</div>
+      <div class="card-desc">技術書・コラムのドラフト。CLAUDE.mdガイド等。</div>
+      <div class="card-tags"><span class="tag tag-content">コンテンツ</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">場所: misc/agent-team/content/zenn_*.md</div>
+    </div>
+    <div class="card">
+      <div class="card-title">X（Twitter）投稿下書き</div>
+      <div class="card-desc">X投稿ドラフト・KPIテンプレート・プロフィール案。</div>
+      <div class="card-tags"><span class="tag tag-content">コンテンツ</span><span class="tag tag-local">ローカル</span></div>
+      <div class="note">場所: misc/agent-team/content/x_*.md</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 外部公開状況 ===== -->
+<div class="section">
+  <div class="section-title">⚠️ 外部公開状況</div>
+  <div style="background:#1a1a22;border-radius:8px;padding:14px 16px;font-size:12px;color:#888;line-height:1.8;">
+    <div>✅ <strong style="color:#4ade80">GitHub Pages公開済み</strong>：ai-agent-lab サイト・ブログ・ジェネレーター（URLでスマホ共有可）</div>
+    <div>📌 その他HTMLはローカルのみ。外部公開するには GitHub Pages (ai-agent-lab) へのアップが必要。</div>
+    <div>📌 機密情報を含む資料（WeYou・RxPro向け）はDiscordファイル添付でのみ共有。</div>
+    <div>📌 非機密HTMLはGitHub Pagesで公開URL化可能（ボス・アオの判断が必要）。</div>
+  </div>
+</div>
+
+</body>
+</html>

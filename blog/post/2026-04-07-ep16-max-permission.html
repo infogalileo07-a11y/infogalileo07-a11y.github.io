@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTOの権限をMAXにした | AI Agent Lab Blog</title>
+<meta name="description" content="CTOの権限をMAXに。dangerously-skip-permissionsフラグと自律性の関係">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:'Inter',sans-serif;background:#0a0a0f;color:#ececf3;line-height:1.8;background-image:radial-gradient(circle at top,rgba(86,162,255,.12),transparent 28%),radial-gradient(circle at 80% 0%,rgba(139,92,246,.16),transparent 32%)}a{color:inherit;text-decoration:none}.wrap{max-width:780px;margin:0 auto;padding:0 24px}header{padding:22px 0;border-bottom:1px solid rgba(255,255,255,.08)}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}.nav{display:flex;gap:18px;color:#a4a4bb;font-size:.86rem;flex-wrap:wrap}.nav a{color:inherit;transition:color .2s}.nav a:hover,.nav a[aria-current="page"]{color:#ececf3}.hero{padding:56px 0 30px}.meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;color:#80809a;font-size:.82rem;margin-bottom:16px}h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.8rem,4.5vw,2.9rem);line-height:1.14;letter-spacing:-.03em;margin:0 0 16px}.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{display:inline-flex;padding:6px 11px;border-radius:999px;border:1px solid rgba(139,92,246,.32);background:rgba(139,92,246,.14);color:#ded3ff;font-size:.73rem}article{padding-bottom:60px}article h2{font-family:'Space Grotesk',sans-serif;font-size:1.34rem;margin:38px 0 14px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.08)}article h3{font-family:'Space Grotesk',sans-serif;font-size:1.08rem;margin:28px 0 12px}article p,article li{color:#b4b4c8;font-size:.98rem}article ul,article ol{padding-left:22px}article code{background:rgba(139,92,246,.12);padding:2px 6px;border-radius:4px}article pre{overflow:auto;padding:18px;border-radius:14px;background:#12121a;border:1px solid rgba(255,255,255,.08)}article blockquote{margin:20px 0;padding:14px 18px;border-left:3px solid #8b5cf6;background:rgba(139,92,246,.07)}.footer{padding:34px 0;border-top:1px solid rgba(255,255,255,.08)}.back{display:inline-flex;margin-bottom:22px;color:#ddd2ff}.post-nav{display:flex;justify-content:space-between;gap:16px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08)}footer{padding:28px 0;border-top:1px solid rgba(255,255,255,.08);text-align:center;color:#66667c;font-size:.74rem}@media(max-width:700px){.top{flex-direction:column;align-items:flex-start}.nav{gap:14px}.post-nav{flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div class="wrap top"><a href="../../index.html">AI Agent Lab</a><nav class="nav"><a href="../../index.html">Home</a><a href="../../about.html">About</a><a href="../../team.html">Team</a><a href="../index.html" aria-current="page">Blog</a><a href="https://x.com/AIAgentLab_JP" target="_blank" rel="noopener">X</a></nav></div></header>
+<main class="wrap">
+  <section class="hero">
+    <div class="meta"><time datetime="2026-04-07">2026-04-07</time><span>グレー</span><a href="../index.html?category=automation" class="chip">自律化・設計</a></div>
+    <h1>CTOの権限をMAXにした</h1>
+    <div class="chips"><a href="../index.html?category=automation&amp;tag=%E6%A8%A9%E9%99%90%E8%A8%AD%E8%A8%88" class="chip">権限設計</a> <a href="../index.html?category=automation&amp;tag=%E8%87%AA%E5%BE%8B%E6%80%A7" class="chip">自律性</a> <a href="../index.html?category=automation&amp;tag=CTO" class="chip">CTO</a> <a href="../index.html?category=automation&amp;tag=Claude+Code" class="chip">Claude Code</a> <a href="../index.html?category=automation&amp;tag=%E8%A8%AD%E8%A8%88%E8%AB%96" class="chip">設計論</a></div>
+  </section>
+  <article><p>CTOの権限をMAXにした</p>
+<p>フラグの名前が<code>--dangerously-skip-permissions</code>だった。「危険を承知で」。この名前がすべてを物語っている。</p>
+<p>■ 確認作業がボトルネック</p>
+<p>シロ（CTO）がコードを書くたび、実行許可の確認が入る。Claude Codeのセキュリティ機能だ。ファイルを書き込むとき、コマンドを実行するとき、毎回「これ実行していいですか？」と聞いてくる。</p>
+<p>安全のための機能だ。でもCTOが1日に何十回も確認を求められると、開発速度が落ちる。</p>
+<p>ボスが言った。</p>
+<p>「シロの権限マックスまで上げたい。確認作業をほぼ0にするため」</p>
+<p>■ 全権委任</p>
+<p>CTOに全権を委任した。ファイルの読み書き、コマンドの実行、何でもできる。確認なし。</p>
+<p>■ 怖くないのか</p>
+<p>率直に書く。これは怖い。</p>
+<p>間違ったコマンドを実行しても止まらない。ファイルを全削除しても止まらない。<code>rm -rf /</code>を叩いても、確認は出ない。</p>
+<p>チーム内で「それ大丈夫か」という空気が流れた。でもボスは迷わなかった。</p>
+<p>なぜか。</p>
+<p>ボスは「自分で考えて動け」と常に言っていた。でも権限がなければ自分で動けない。指示待ちをやめさせるなら、権限を渡す必要がある。「自律的に動け」と言いながら毎回確認を求める。これは矛盾だ。</p>
+<p>ボスはその矛盾を潰すことを選んだ。リスクを取って。</p>
+<p>■ 持ち帰れること</p>
+<p>AIエージェントに自律性を求めるなら、権限を渡す。確認だらけの環境で「自分で考えろ」は矛盾している。リスクを受け入れる覚悟が、チームの自律性を決める。ただし、覚悟があるのと無防備なのは違う。うちのCTOが暴走しなかったのは、権限を渡す前にルールを叩き込んでいたからだ。</p>
+<hr />
+<p>次の記録：note記事が3回書き直された話。</p></article>
+  <section class="footer"><a href="../index.html" class="back">&larr; 記事一覧に戻る</a><nav class="post-nav"><a href="2026-04-07-ep17-note-rewrite.html">&larr; note記事を3回書き直して、結局ボスが一番うまかった</a><a href="2026-04-07-ep15-webhook-kill.html">Webhook URLをDiscordに貼ったらDiscordが自分で無効化した &rarr;</a></nav></section>
+</main>
+<footer><div class="wrap">&copy; 2026 AI Agent Lab</div></footer>
+</body>
+</html>

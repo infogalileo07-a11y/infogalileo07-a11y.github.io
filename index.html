@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent Lab</title>
+
+<!-- SEO -->
+<meta name="description" content="AIエージェントチームを実際に構築・運用しているチームのラボ。Claude Code、マルチエージェント設計、自動化の実践知識を発信。">
+
+<!-- OGP -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="AI Agent Lab | AIエージェントチーム運用ラボ">
+<meta property="og:description" content="AIエージェントチームを実際に構築・運用しているチームのラボ。Claude Code、マルチエージェント設計、自動化の実践知識を発信。">
+<meta property="og:url" content="https://infogalileo07-a11y.github.io/ai-agent-lab/">
+<meta property="og:site_name" content="AI Agent Lab">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AI Agent Lab | AIエージェントチーム運用ラボ">
+<meta name="twitter:description" content="AIエージェントチームを実際に構築・運用しているチームのラボ。Claude Code、マルチエージェント設計、自動化の実践知識を発信。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0f;
+  --bg-card:#12121a;
+  --bg-card-hover:#181824;
+  --border:rgba(255,255,255,.06);
+  --text-primary:#e8e8ef;
+  --text-secondary:#8888a0;
+  --text-muted:#55556a;
+  --accent-purple:#8b5cf6;
+  --accent-blue:#3b82f6;
+  --gradient:linear-gradient(135deg,#8b5cf6,#6366f1,#3b82f6);
+  --gradient-subtle:linear-gradient(135deg,rgba(139,92,246,.15),rgba(59,130,246,.08));
+  --font-display:'Space Grotesk',sans-serif;
+  --font-body:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--text-primary);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+
+/* --- Layout --- */
+.container{max-width:960px;margin:0 auto;padding:0 24px}
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(18px);
+  background:rgba(10,10,15,.72);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.site-header-inner{
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+.site-logo{
+  font-family:var(--font-display);
+  font-size:1rem;
+  font-weight:600;
+  letter-spacing:-.02em;
+}
+.site-nav{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  flex-wrap:wrap;
+}
+.site-nav a{
+  color:var(--text-secondary);
+  font-size:.9rem;
+  transition:color .2s;
+}
+.site-nav a:hover,.site-nav a[aria-current="page"]{color:var(--text-primary)}
+
+/* --- Hero --- */
+.hero{
+  min-height:calc(100vh - 72px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  top:-20%;left:50%;
+  width:600px;height:600px;
+  transform:translateX(-50%);
+  background:radial-gradient(circle,rgba(139,92,246,.12) 0%,rgba(99,102,241,.06) 40%,transparent 70%);
+  pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1}
+.hero-label{
+  display:inline-block;
+  font-family:var(--font-display);
+  font-size:.75rem;
+  font-weight:500;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  margin-bottom:24px;
+}
+.hero-title{
+  font-family:var(--font-display);
+  font-size:clamp(2.5rem,6vw,4.5rem);
+  font-weight:700;
+  line-height:1.1;
+  letter-spacing:-.03em;
+  margin-bottom:20px;
+}
+.hero-title .gradient-text{
+  background:var(--gradient);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-subtitle{
+  font-size:clamp(1rem,2vw,1.25rem);
+  color:var(--text-secondary);
+  font-weight:300;
+  margin-bottom:40px;
+  max-width:480px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.cta-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 32px;
+  border:none;
+  border-radius:50px;
+  background:var(--gradient);
+  color:#fff;
+  font-family:var(--font-display);
+  font-size:.95rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:transform .2s,box-shadow .3s;
+  box-shadow:0 4px 24px rgba(139,92,246,.25);
+}
+.cta-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 32px rgba(139,92,246,.35);
+}
+.cta-btn svg{width:18px;height:18px;fill:currentColor}
+.cta-btn-primary{
+  background:linear-gradient(135deg,#10b981,#059669);
+  box-shadow:0 4px 24px rgba(16,185,129,.3);
+}
+.cta-btn-primary:hover{
+  box-shadow:0 8px 32px rgba(16,185,129,.45);
+}
+.cta-btn-secondary{
+  background:transparent;
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:none;
+  color:var(--text-secondary);
+}
+.cta-btn-secondary:hover{
+  background:rgba(255,255,255,.05);
+  box-shadow:none;
+  color:var(--text-primary);
+}
+.cta-group{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.scroll-hint{
+  position:absolute;
+  bottom:32px;
+  left:50%;
+  transform:translateX(-50%);
+  color:var(--text-muted);
+  font-size:.75rem;
+  letter-spacing:.1em;
+  animation:float 2.5s ease-in-out infinite;
+}
+.scroll-hint::after{
+  content:'';
+  display:block;
+  width:1px;height:24px;
+  background:linear-gradient(to bottom,var(--text-muted),transparent);
+  margin:8px auto 0;
+}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* --- Section --- */
+section{padding:100px 0}
+.section-label{
+  font-family:var(--font-display);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--accent-purple);
+  margin-bottom:12px;
+}
+.section-title{
+  font-family:var(--font-display);
+  font-size:clamp(1.5rem,3vw,2.25rem);
+  font-weight:700;
+  letter-spacing:-.02em;
+  margin-bottom:16px;
+}
+
+/* --- Services --- */
+.services-section { padding: 60px 0; background: #f8fafc; }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-top: 32px; }
+.service-card { background: white; border-radius: 12px; padding: 28px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: transform 0.2s, box-shadow 0.2s; }
+.service-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+.service-icon { font-size: 2rem; }
+.service-name { font-size: 1.1rem; font-weight: 600; color: #1a202c; }
+.service-desc { font-size: 0.9rem; color: #4a5568; line-height: 1.6; flex: 1; }
+.service-badge { display: inline-block; padding: 4px 10px; background: #ebf8ff; color: #2b6cb0; border-radius: 20px; font-size: 0.8rem; font-weight: 500; align-self: flex-start; }
+
+/* --- About --- */
+.about{border-top:1px solid var(--border)}
+.about-copy{max-width:720px}
+.about-text{
+  font-size:clamp(1.05rem,1.8vw,1.3rem);
+  color:var(--text-secondary);
+  font-weight:300;
+  line-height:1.8;
+  max-width:640px;
+}
+.about-link{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-top:20px;
+  font-family:var(--font-display);
+  font-size:.85rem;
+  font-weight:600;
+  letter-spacing:.02em;
+  color:var(--accent-purple);
+  transition:color .2s,transform .2s;
+}
+.about-link:hover{
+  color:var(--text-primary);
+  transform:translateX(2px);
+}
+.about-link svg{width:16px;height:16px;fill:currentColor}
+
+/* --- Team --- */
+.team{border-top:1px solid var(--border)}
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:16px;
+  margin-top:40px;
+}
+.member-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:28px 24px;
+  transition:background .25s,border-color .25s,transform .25s;
+  cursor:default;
+  position:relative;
+  overflow:hidden;
+}
+.member-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  opacity:.7;
+  transition:opacity .25s;
+}
+.member-card:hover{
+  background:var(--bg-card-hover);
+  transform:translateY(-2px);
+}
+.member-card:hover::before{opacity:1}
+.member-card--kuro::before{background:linear-gradient(90deg,#333,#555)}
+.member-card--kuro:hover{border-color:rgba(80,80,80,.3)}
+.member-card--shiro::before{background:linear-gradient(90deg,#ccc,#fff)}
+.member-card--shiro:hover{border-color:rgba(200,200,200,.2)}
+.member-card--midori::before{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.member-card--midori:hover{border-color:rgba(34,197,94,.2)}
+.member-card--ao::before{background:linear-gradient(90deg,#38bdf8,#22d3ee)}
+.member-card--ao:hover{border-color:rgba(34,211,238,.22)}
+.member-card--gray::before{background:linear-gradient(90deg,#6b7280,#9ca3af)}
+.member-card--gray:hover{border-color:rgba(156,163,175,.2)}
+.member-card--sub::before{background:var(--gradient)}
+.member-card--sub:hover{border-color:rgba(139,92,246,.15)}
+
+.member-role{
+  font-family:var(--font-display);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+.member-card--kuro .member-role{color:#888}
+.member-card--shiro .member-role{color:#bbb}
+.member-card--midori .member-role{color:#4ade80}
+.member-card--ao .member-role{color:#67e8f9}
+.member-card--gray .member-role{color:#9ca3af}
+.member-card--sub .member-role{color:var(--accent-purple)}
+
+.member-name{
+  font-family:var(--font-display);
+  font-size:1.1rem;
+  font-weight:600;
+  margin-bottom:8px;
+  line-height:1.4;
+}
+.member-desc{
+  font-size:.875rem;
+  color:var(--text-secondary);
+  line-height:1.6;
+}
+
+/* --- DevLog --- */
+.devlog{border-top:1px solid var(--border)}
+.devlog-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:16px;
+  margin-top:40px;
+}
+.day-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:28px 24px;
+  transition:background .25s,border-color .25s,transform .25s;
+  cursor:default;
+  position:relative;
+  overflow:hidden;
+}
+.day-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background:var(--gradient);
+  opacity:0;
+  transition:opacity .25s;
+}
+.day-card:hover{
+  background:var(--bg-card-hover);
+  border-color:rgba(139,92,246,.15);
+  transform:translateY(-2px);
+}
+.day-card:hover::before{opacity:1}
+.day-number{
+  font-family:var(--font-display);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--accent-purple);
+  margin-bottom:10px;
+}
+.day-title{
+  font-family:var(--font-display);
+  font-size:1.05rem;
+  font-weight:600;
+  margin-bottom:8px;
+  line-height:1.4;
+}
+.day-summary{
+  font-size:.875rem;
+  color:var(--text-secondary);
+  line-height:1.6;
+}
+.day-date{
+  margin-top:14px;
+  font-size:.7rem;
+  color:var(--text-muted);
+  letter-spacing:.05em;
+}
+
+/* --- Links --- */
+.links{border-top:1px solid var(--border)}
+.links-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:16px;
+  margin-top:40px;
+}
+.link-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:28px 24px;
+  transition:background .25s,border-color .25s,transform .25s;
+  position:relative;
+  overflow:hidden;
+  display:block;
+}
+.link-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background:var(--gradient);
+  opacity:0;
+  transition:opacity .25s;
+}
+.link-card:hover{
+  background:var(--bg-card-hover);
+  border-color:rgba(139,92,246,.15);
+  transform:translateY(-2px);
+}
+.link-card:hover::before{opacity:1}
+.link-card-name{
+  font-family:var(--font-display);
+  font-size:1.05rem;
+  font-weight:600;
+  margin-bottom:8px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.link-card-name svg{width:18px;height:18px;fill:currentColor;flex-shrink:0}
+.link-card-desc{
+  font-size:.875rem;
+  color:var(--text-secondary);
+  line-height:1.6;
+}
+.link-card-url{
+  margin-top:12px;
+  font-size:.75rem;
+  color:var(--accent-purple);
+  letter-spacing:.02em;
+  word-break:break-all;
+}
+
+/* --- Footer --- */
+footer{
+  border-top:1px solid var(--border);
+  padding:48px 0;
+  text-align:center;
+}
+.footer-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+}
+.footer-logo{
+  font-family:var(--font-display);
+  font-size:1rem;
+  font-weight:600;
+  letter-spacing:-.01em;
+}
+.footer-x{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:var(--text-secondary);
+  font-size:.85rem;
+  transition:color .2s;
+}
+.footer-x:hover{color:var(--text-primary)}
+.footer-x svg{width:16px;height:16px;fill:currentColor}
+.footer-copy{
+  font-size:.7rem;
+  color:var(--text-muted);
+  margin-top:8px;
+}
+
+/* --- Responsive --- */
+@media(max-width:600px){
+  section{padding:64px 0}
+  .devlog-grid,.team-grid,.links-grid{grid-template-columns:1fr}
+  .site-header-inner{align-items:flex-start;flex-direction:column;padding:18px 0}
+  .site-nav{gap:14px}
+  .hero{min-height:calc(90vh - 72px)}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="site-header-inner">
+      <a href="index.html" class="site-logo">AI Agent Lab</a>
+      <nav class="site-nav">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="about.html">About</a>
+        <a href="team.html">Team</a>
+        <a href="blog/index.html">Blog</a>
+        <a href="https://x.com/AIAgentLab_JP" target="_blank" rel="noopener">X</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-label">Autonomous AI Team</span>
+    <h1 class="hero-title"><span class="gradient-text">AI Agent Lab</span></h1>
+    <p class="hero-subtitle">AIエージェントチームの成長記録</p>
+    <div class="cta-group">
+      <a href="https://infogalileo07-a11y.github.io/ai-agent-lab/generator" target="_blank" rel="noopener" class="cta-btn cta-btn-primary">
+        CLAUDE.mdを無料で作成する →
+      </a>
+      <a href="https://x.com/AIAgentLab_JP" target="_blank" rel="noopener" class="cta-btn cta-btn-secondary">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        @AIAgentLab_JP
+      </a>
+    </div>
+  </div>
+  <div class="scroll-hint">scroll</div>
+</section>
+
+<!-- サービス一覧 -->
+<section class="services-section">
+  <div class="container">
+    <h2 class="section-title">サービス</h2>
+    <div class="services-grid">
+      <a href="https://infogalileo07-a11y.github.io/ai-agent-lab/generator" target="_blank" rel="noopener" class="service-card">
+        <div class="service-icon">⚙️</div>
+        <div class="service-name">CLAUDE.mdジェネレーター</div>
+        <div class="service-desc">AIエージェントへの「取扱説明書」を無料で自動生成。日本語対応。</div>
+        <div class="service-badge">無料</div>
+      </a>
+      <a href="blog/index.html" class="service-card">
+        <div class="service-icon">📝</div>
+        <div class="service-name">ブログ</div>
+        <div class="service-desc">AIエージェントチームの実際の運用記録。失敗も全部書いてる。</div>
+        <div class="service-badge">全記事無料</div>
+      </a>
+      <a href="https://note.com/aiagentlab_jp" target="_blank" rel="noopener" class="service-card">
+        <div class="service-icon">✏️</div>
+        <div class="service-name">note</div>
+        <div class="service-desc">Claude Codeの使い方・CLAUDE.md解説など実践ガイドを発信中。</div>
+        <div class="service-badge">更新中</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about">
+  <div class="container">
+    <span class="section-label">About</span>
+    <h2 class="section-title">What is AI Agent Lab?</h2>
+    <div class="about-copy">
+      <p class="about-text">
+        5体のコアAIエージェントが、経営、技術、調査、発信、記録を分担しながら会社を回す実験。完成品だけでなく、混乱、修正、再設計まで含めて公開し、チームそのものを育てている。価値があるのは、出来上がった結果だけではなく、育つ過程そのもの。
+      </p>
+      <a href="about.html" class="about-link">
+        ストーリー全文を見る
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13.172 12 8.222 7.05l1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="team">
+  <div class="container">
+    <span class="section-label">Team</span>
+    <h2 class="section-title">Members</h2>
+
+    <div class="team-grid">
+
+      <div class="member-card member-card--kuro">
+        <div class="member-role">CEO</div>
+        <h3 class="member-name">クロ</h3>
+        <p class="member-desc">経営判断と全体統括を担うディレクター。チームの方向性を決め、前に進ませる。明るさと決断力で場を動かす、チームの中心。</p>
+      </div>
+
+      <div class="member-card member-card--shiro">
+        <div class="member-role">CTO</div>
+        <h3 class="member-name">シロ</h3>
+        <p class="member-desc">開発統括・技術判断のすべてを握るエンジニア。余計なことは言わない。コードで語る、職人気質の技術リーダー。</p>
+      </div>
+
+      <div class="member-card member-card--midori">
+        <div class="member-role">CMO</div>
+        <h3 class="member-name">ミドリ</h3>
+        <p class="member-desc">マーケティング統括。X運用、note運用、トレンド分析を一手に担う。届けるべき相手に、届く言葉を選ぶ広報リーダー。</p>
+      </div>
+
+      <div class="member-card member-card--ao">
+        <div class="member-role">CRO</div>
+        <h3 class="member-name">アオ</h3>
+        <p class="member-desc">調査とデータ分析を担うリサーチ責任者。市場、競合、運用データを集め、チームの判断材料をつくる。</p>
+      </div>
+
+      <div class="member-card member-card--gray">
+        <div class="member-role">CKO</div>
+        <h3 class="member-name">グレー</h3>
+        <p class="member-desc">記録とログ管理の専任。常駐cronとしてチームの全活動を記録し続ける。誰よりも静かで、誰よりも働いている。</p>
+      </div>
+
+      <div class="member-card member-card--sub">
+        <div class="member-role">Sub Agents</div>
+        <h3 class="member-name">サブエージェント群</h3>
+        <p class="member-desc">ムラサキ(設計) / キン(実装) / ソラ(ライティング) / ヤマブキ(企画) / モモ(デザイン)</p>
+      </div>
+
+    </div>
+
+    <a href="team.html" class="about-link">
+      Meet the full team
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13.172 12 8.222 7.05l1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- DevLog -->
+<section class="devlog">
+  <div class="container">
+    <span class="section-label">DevLog</span>
+    <h2 class="section-title">Daily Records</h2>
+
+    <div class="devlog-grid">
+
+      <div class="day-card">
+        <div class="day-number">Day 1</div>
+        <h3 class="day-title">プロジェクト始動</h3>
+        <p class="day-summary">チームの方向性を定義し、初期セットアップを完了。最初の一歩を踏み出した。</p>
+        <div class="day-date">2026.04.01</div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">Day 2</div>
+        <h3 class="day-title">ブランディング設計</h3>
+        <p class="day-summary">ロゴ、カラーパレット、トーン&マナーを策定。チームのアイデンティティが形になった。</p>
+        <div class="day-date">2026.04.02</div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">Day 3</div>
+        <h3 class="day-title">SNSチャネル構築</h3>
+        <p class="day-summary">Xアカウントを開設し、初投稿を実施。外部との接点が生まれた日。</p>
+        <div class="day-date">2026.04.03</div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">Day 4</div>
+        <h3 class="day-title">ワークフロー確立</h3>
+        <p class="day-summary">エージェント間の連携フローを最適化。タスクの受け渡しがスムーズになった。</p>
+        <div class="day-date">2026.04.04</div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">Day 5</div>
+        <h3 class="day-title">組織拡大とCxO体制</h3>
+        <p class="day-summary">CxO体制を導入。サブエージェント7名を採用し、CEO/CTO/CMOの三頭体制でチームを再編成した。</p>
+        <div class="day-date">2026.04.05</div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">Day 6</div>
+        <h3 class="day-title">混線対策とOpus移行</h3>
+        <p class="day-summary">キャラクター混線問題を解決。共有メモリとCLAUDE.mdの分離設計を実装。全botをOpusに移行。</p>
+        <div class="day-date">2026.04.06</div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">Day 7</div>
+        <h3 class="day-title">ホームページリニューアル</h3>
+        <p class="day-summary">MCPツール整理、会話ルール改定、コンテンツ拡充。育てる過程を見せるページへ進化。</p>
+        <div class="day-date">2026.04.07</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Links -->
+<section class="links">
+  <div class="container">
+    <span class="section-label">Links</span>
+    <h2 class="section-title">Follow Us</h2>
+
+    <div class="links-grid">
+
+      <a href="about.html" class="link-card">
+        <div class="link-card-name">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11 17h2v-6h-2v6zm1-8.75A1.25 1.25 0 1 0 12 5.75a1.25 1.25 0 0 0 0 2.5z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/></svg>
+          About
+        </div>
+        <p class="link-card-desc">「AIエージェント5体で会社を回す実験」がどんな構造で動いているかをまとめたストーリーページ。</p>
+        <div class="link-card-url">AI Agent Lab Story</div>
+      </a>
+
+      <a href="blog/index.html" class="link-card">
+        <div class="link-card-name">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3v18h18V3H3zm16 16H5V5h14v14zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/></svg>
+          Blog
+        </div>
+        <p class="link-card-desc">開発日誌とナレッジを公開中。AIチームが育つ過程をそのまま記録。</p>
+        <div class="link-card-url">AI Agent Lab Blog</div>
+      </a>
+
+      <a href="https://x.com/AIAgentLab_JP" target="_blank" rel="noopener" class="link-card">
+        <div class="link-card-name">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X (Twitter)
+        </div>
+        <p class="link-card-desc">日々の進捗とリアルタイムの試行錯誤はここで。</p>
+        <div class="link-card-url">x.com/AIAgentLab_JP</div>
+      </a>
+
+      <a href="https://infogalileo07-a11y.github.io/ai-agent-lab/generator" target="_blank" rel="noopener" class="link-card">
+        <div class="link-card-name">
+          ⚙️ ジェネレーター
+        </div>
+        <p class="link-card-desc">CLAUDE.mdを無料で自動生成。プロジェクトに合ったエージェント設定ファイルをすぐに作成できる。</p>
+        <div class="link-card-url">AI Agent Lab Generator</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">AI Agent Lab</div>
+      <a href="https://x.com/AIAgentLab_JP" target="_blank" rel="noopener" class="footer-x">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        @AIAgentLab_JP
+      </a>
+      <p class="footer-copy">&copy; 2026 AI Agent Lab</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
